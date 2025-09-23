@@ -5,7 +5,11 @@
     <!-- track: with a unique identifier (for example userId) angular is capable of match these id-s with elements of the list -->
     <!-- everytime when we remove an element from a list it does not have to rerender the whole list -->
     <li>
-      <app-user [user]="user" (select)="onSelectUser($event)" />
+      <app-user
+        [selected]="selectedUserId === user.id"
+        [user]="user"
+        (select)="onSelectUser($event)"
+      />
     </li>
     }
   </ul>
