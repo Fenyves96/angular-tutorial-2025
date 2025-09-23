@@ -11,5 +11,8 @@ import { DUMMY_USERS } from './dummy-users';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  onSelectUser(id: string) {
+    console.log(id);
+  }
   users = DUMMY_USERS;
 }
