@@ -1,18 +1,13 @@
 <app-header />
 <main>
   <ul id="users">
+    @for (user of users; track user.id) {
+    <!-- track: with a unique identifier (for example userId) angular is capable of match these id-s with elements of the list -->
+    <!-- everytime when we remove an element from a list it does not have to rerender the whole list -->
     <li>
-      <app-user [user]="users[0]" (select)="onSelectUser($event)" />
+      <app-user [user]="user" (select)="onSelectUser($event)" />
     </li>
-    <li>
-      <app-user [user]="users[1]" (select)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[2]" (select)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[3]" (select)="onSelectUser($event)" />
-    </li>
+    }
   </ul>
   <app-tasks name="{{ selectedUser?.name }}" />
 </main>
