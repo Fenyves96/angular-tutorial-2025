@@ -5,8 +5,7 @@ import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
-  standalone: true,
-  imports: [FormsModule], //includes a component which uses a form component that prevent browser default for submit button -> ngSubmit
+  standalone: false,
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.css',
 })
