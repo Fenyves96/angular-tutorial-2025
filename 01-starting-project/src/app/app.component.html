@@ -1,0 +1,38 @@
+<app-header />
+<main>
+  <ul id="users">
+    @for (user of users; track user.id) {
+    <!-- track: with a unique identifier (for example userId) angular is capable of match these id-s with elements of the list -->
+    <!-- everytime when we remove an element from a list it does not have to rerender the whole list -->
+    <li>
+      <app-user
+        [selected]="selectedUserId === user.id"
+        [user]="user"
+        (select)="onSelectUser($event)"
+      />
+    </li>
+    }
+  </ul>
+
+  @if (selectedUser) {
+  <app-tasks [userId]="selectedUser.id" name="{{ selectedUser.name }}" />
+  } @else {
+  <p id="fallback">Select a user!</p>
+  }
+
+  <!-- <br />
+  <h2>Old solution</h2>
+  <ul id="users">
+    <li *ngFor="let user of users">
+      <app-user [user]="user" (select)="onSelectUser($event)" />
+    </li>
+  </ul>
+
+  <app-tasks
+    *ngIf="selectedUser; else fallback"
+    name="{{ selectedUser!.name }}"
+  />
+  <ng-template #fallback>
+    <p id="fallback">Select a user!</p>
+  </ng-template> -->
+</main>

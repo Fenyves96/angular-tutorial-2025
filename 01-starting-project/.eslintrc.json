@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        "default": [
+          // fields first
+          "signature",
+          "field",
+          "constructor",
+          // methods last
+          "method"
+        ]
+      }
+    ]
+  }
+}
