@@ -1,5 +1,5 @@
 import { InvestmentService } from './../investment.service';
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { InvestmentResult } from '../investment-result.model';
 import { CurrencyPipe } from '@angular/common';
 
@@ -11,9 +11,8 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './investment-results.component.css',
 })
 export class InvestmentResultsComponent {
-  private InvestmentService = inject(InvestmentService);
+  private investmentService = inject(InvestmentService);
 
-  get results() {
-    return this.InvestmentService.resultData;
-  }
+  //results = computed(() => this.investmentService.resultData());
+  results = this.investmentService.resultData.asReadonly();
 }
