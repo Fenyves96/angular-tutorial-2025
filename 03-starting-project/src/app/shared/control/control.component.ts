@@ -1,7 +1,9 @@
 import {
   Component,
+  ElementRef,
   HostBinding,
   HostListener,
+  inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
@@ -22,9 +24,11 @@ export class ControlComponent {
   @HostBinding('class') className = 'control';
 
   label = input.required<string>();
+  private el = inject(ElementRef);
 
   // @HostListener('click') would do the same thing as '(click)' : 'onClick()'
   onClick() {
     console.log('clicked');
+    console.log(this.el);
   }
 }
