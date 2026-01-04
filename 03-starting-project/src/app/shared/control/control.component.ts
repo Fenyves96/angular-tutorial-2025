@@ -1,5 +1,7 @@
+import { Element } from '@angular/compiler';
 import {
   Component,
+  ContentChild,
   ElementRef,
   HostBinding,
   HostListener,
@@ -22,6 +24,9 @@ import {
 })
 export class ControlComponent {
   @HostBinding('class') className = 'control';
+  @ContentChild('input') private control?: ElementRef<
+    HTMLInputElement | HTMLTextAreaElement
+  >;
 
   label = input.required<string>();
   private el = inject(ElementRef);
@@ -30,5 +35,6 @@ export class ControlComponent {
   onClick() {
     console.log('clicked');
     console.log(this.el);
+    console.log(this.control?.nativeElement);
   }
 }
