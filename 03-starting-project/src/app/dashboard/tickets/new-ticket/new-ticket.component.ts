@@ -2,6 +2,8 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
+  output,
   viewChild,
   ViewChild,
 } from '@angular/core';
@@ -19,11 +21,11 @@ import { FormsModule } from '@angular/forms';
 export class NewTicketComponent implements AfterViewInit {
   @ViewChild('form') form?: ElementRef<HTMLFormElement>; //acess only after viewInit (ngAfterViewInit) (cannot be used in onInit)
 
+  add = output<{ title: string; text: string }>();
+
   sameForm = viewChild.required<ElementRef<HTMLFormElement>>('form');
   onSubmit(title: string, request: string) {
-    //console.dir(titleElement);
-    console.log(title);
-    console.log(request);
+    this.add.emit({ title: title, text: request });
 
     //this.form!.nativeElement.reset();
     this.sameForm().nativeElement.reset();
