@@ -3,7 +3,8 @@ import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { Ticket } from './ticket.model';
 import { Title } from '@angular/platform-browser';
-import { TicketComponent } from "./ticket/ticket.component";
+import { TicketComponent } from './ticket/ticket.component';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-tickets',
@@ -24,5 +25,14 @@ export class TicketsComponent {
     };
 
     this.tickets.push(ticket);
+  }
+
+  onCloseTicket(id: string) {
+    this.tickets = this.tickets.map((ticket) => {
+      if (ticket.id === id) {
+        return { ...ticket, status: 'closed' };
+      }
+      return ticket;
+    });
   }
 }
