@@ -1,7 +1,8 @@
 import { TasksService } from './../tasks.service';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 
 import { TaskItemComponent } from './task-item/task-item.component';
+import { TASK_STATUS_OPTIONS, taskStatusOptionsProvider } from '../task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -9,11 +10,36 @@ import { TaskItemComponent } from './task-item/task-item.component';
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.css',
   imports: [TaskItemComponent],
+  providers: [taskStatusOptionsProvider],
 })
 export class TasksListComponent {
   selectedFilter = signal<string>('all');
   private tasksService = inject(TasksService);
-  tasks = this.tasksService.allTasks;
+  taskStatusOptions = inject(TASK_STATUS_OPTIONS);
+
+  tasks = computed(() => {
+    switch (this.selectedFilter()) {
+      case 'all': {
+        return this.tasksService.allTasks();
+      }
+      case 'open': {
+        return this.tasksService
+          .allTasks()
+          .filter((task) => task.status === 'OPEN');
+      }
+      case 'in-progress': {
+        return this.tasksService
+          .allTasks()
+          .filter((task) => task.status === 'IN_PROGRESS');
+      }
+      case 'done': {
+        return this.tasksService
+          .allTasks()
+          .filter((task) => task.status === 'DONE');
+      }
+    }
+    return [];
+  });
 
   onChangeTasksFilter(filter: string) {
     this.selectedFilter.set(filter);
