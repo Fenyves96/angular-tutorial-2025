@@ -1,7 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+<<<<<<< HEAD
   inject,
+=======
+>>>>>>> c5f5d683d522b1b44e893834cecdaca75cf5892c
   output,
   signal,
 } from '@angular/core';
