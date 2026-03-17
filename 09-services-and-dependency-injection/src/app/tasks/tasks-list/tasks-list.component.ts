@@ -15,8 +15,11 @@ import { TASK_STATUS_OPTIONS, taskStatusOptionsProvider } from '../task.model';
 export class TasksListComponent {
   selectedFilter = signal<string>('all');
   private tasksService = inject(TasksService);
+<<<<<<< HEAD
   taskStatusOptions = inject(TASK_STATUS_OPTIONS);
 
+=======
+>>>>>>> b263252b4aed2badaff37e3f4206e0748365f79b
   tasks = computed(() => {
     switch (this.selectedFilter()) {
       case 'all': {
