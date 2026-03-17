@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { MessagesService } from './../message.service';
 import {
   ChangeDetectionStrategy,
@@ -8,9 +7,6 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-=======
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
->>>>>>> c5f5d683d522b1b44e893834cecdaca75cf5892c
 
 @Component({
   selector: 'app-messages-list',
