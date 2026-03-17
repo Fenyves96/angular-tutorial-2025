@@ -7,31 +7,20 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
+  imports: [AsyncPipe],
   selector: 'app-messages-list',
   standalone: true,
   templateUrl: './messages-list.component.html',
   styleUrl: './messages-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MessagesListComponent implements OnInit {
-  messages: string[] = [];
-  private destoryRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    const subscription = this.messagesService.messages$.subscribe(
-      (messages) => {
-        this.messages = messages;
-        this.cdRef.markForCheck();
-      },
-    );
-    this.destoryRef.onDestroy(() => {
-      subscription.unsubscribe();
-    });
-  }
+export class MessagesListComponent {
   private messagesService = inject(MessagesService);
-  private cdRef = inject(ChangeDetectorRef);
+
+  messages$ = this.messagesService.messages$;
 
   get debugOutput() {
     console.log('[MessagesList] "debugOutput" binding re-evaluated.');
