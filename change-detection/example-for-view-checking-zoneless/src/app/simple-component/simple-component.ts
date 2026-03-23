@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChildComponent } from '../child-component/child-component';
 
 @Component({
   selector: 'app-simple-component',
-  imports: [],
+  imports: [ChildComponent],
   //All bindings interested in data changing
   template: `
     <h2>{{ topicName }}</h2>
     @if (isVisible) {
       <div>{{ getInfo() }}</div>
     }
+    <app-child-component />
   `,
   styleUrl: './simple-component.scss',
 })
@@ -17,6 +19,7 @@ export class SimpleComponent {
   isVisible = true;
 
   getInfo() {
+    console.log('getInfo function has been called');
     return 'random info';
   }
 
