@@ -95,5 +95,11 @@ Change Detection in Angular Pt.3 - OnPush Change Detection Strategy](https://www
 
 ![alt text](image.png)
 
-What does it mean zone an zoneless?
-What does Zone js do?
+### What does it mean zoneless?
+Change detection is a bottleneck of large applications.
+It does not know properly which component has to be refreshed.
+It requires an extra bundle size also.
+
+#### Introducing signals
+
+
