@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ChangeDetectionStrategy } from '@angular/core';
 import { ChildComponent } from '../child-component/child-component';
 
 @Component({
@@ -12,7 +12,7 @@ import { ChildComponent } from '../child-component/child-component';
     }
     <app-child-component />
   `,
-  styleUrl: './simple-component.scss',
+  styleUrl: './simple-component.scss'
 })
 export class SimpleComponent {
   topicName = 'Decoded frontend';
