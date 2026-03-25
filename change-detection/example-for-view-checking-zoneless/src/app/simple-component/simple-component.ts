@@ -20,38 +20,15 @@ import { AsyncPipe } from '@angular/common';
     @if (isVisible) {
       <div>{{ getInfo() }}</div>
     }
-    <p>observable variable value: {{ observableVariable$ | async }}</p>
-    <p>signal variable value: {{ signalVariable() }}</p>
     <app-child-component />
   `,
   styleUrl: './simple-component.scss',
 })
-export class SimpleComponent implements AfterViewInit {
+export class SimpleComponent {
   topicName = 'Decoded frontend';
   isVisible = true;
   destroyRef = inject(DestroyRef);
   cdRef = inject(ChangeDetectorRef);
-  observableVariable$ = new BehaviorSubject<number>(0);
-  signalVariable = signal<number>(0);
-
-  ngAfterViewInit(): void {
-    const subscription = interval(1000)
-      .pipe(map((val) => val + 1))
-      .subscribe({
-        next: (val) => {
-          this.observableVariable$.next(val);
-          this.signalVariable.set(val);
-          this.cdRef.detectChanges;
-        },
-      });
-    this.destroyRef.onDestroy(() => {
-      subscription.unsubscribe();
-    });
-
-    setInterval(() => {
-      this.signalVariable.update((val) => val + 1);
-    }, 1 * 1000);
-  }
 
   getInfo() {
     console.log('getInfo function has been called');
