@@ -22,7 +22,7 @@ export class SimpleComponent {
     return 'random info';
   }
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor() {
     setTimeout(() => {
       this.topicName = 'new topic name after timeout';
       console.log('Topic name changed to', this.topicName);
