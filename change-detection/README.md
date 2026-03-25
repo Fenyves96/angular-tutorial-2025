@@ -92,6 +92,43 @@ In this case we have to take care of change detection manually. (not in every ca
 Change Detection in Angular Pt.3 - OnPush Change Detection Strategy](https://www.youtube.com/watch?v=WAu7omIoerM)
 
 
+RxJS & OnPush
+RxJS & OnPush
+
+Variables ending with $ (like messages$) indicate that the variable is an Observable (or Subject / BehaviorSubject).
+It’s a naming convention.
+
+A BehaviorSubject is both an Observable and an Observer — meaning you can:
+• Subscribe to it
+• Emit new values with .next()
+
+When subscribing manually to an Observable (e.g., in ngOnInit), Angular doesn’t automatically know that your component’s data has changed.
+
+will not trigger a UI update under OnPush — unless you tell Angular manually.
+You fix this by calling markForCheck() inside the subscription:
+markForCheck() tells Angular that this component (and ancestors using OnPush) should be checked in the next change detection cycle.
+
+When you manually subscribe to an observable in a component, you must also unsubscribe when the component is destroyed.
+Modern Angular (v16+) — DestroyRef : It lets you easily run cleanup logic without implementing OnDestroy.
+
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+    When you combine OnPush, RxJS subscriptions, and ChangeDetectorRef, you end up with a lot of repetitive boilerplate.
+
+-> Alternative : use async pipe in the template
+
+Async Pipe
+
+The async pipe in Angular automatically subscribes to an Observable or Promise, updates the view when new values are emitted, and unsubscribes when the component is destroyed. It simplifies code, prevents memory leaks, and works perfectly with OnPush change detection.
+Under the hood, Angular handles everything for you:
+• It subscribes to your Observable
+• Renders the latest emitted value
+• Triggers change detection (even with OnPush)
+• And automatically unsubscribes when the component is destroyed
+So you don’t need to use ChangeDetectorRef, DestroyRef, or ngOnDestroy.
+
+![alt text](image-3.png)
 
 ![alt text](image.png)
 
@@ -100,6 +137,16 @@ Change detection is a bottleneck of large applications.
 It does not know properly which component has to be refreshed.
 It requires an extra bundle size also.
 
+In Angular with signals, when you change a signal’s value, Angular automatically knows that the state has changed and updates the relevant views — no need for zone.js to trigger change detection.
+That’s why signals make it possible to build zoneless Angular applications, improving performance and reducing overhead.
+
 #### Introducing signals
+With Signals, Angular knows exactly what data changed and which components depend on it, so it can update only those components — even under OnPush.
+#TODO: signal solution
 
-
+sources:
+https://medium.com/@jaouadirabeb/from-zone-js-to-zoneless-the-evolution-of-angulars-change-detection-signals-and-observables-ded49b9e664a
+https://www.youtube.com/watch?v=hZOauXaO8Z8&t=11s
+https://www.youtube.com/watch?v=Ys7xdebd66Y&t=652s
+https://www.youtube.com/watch?v=WAu7omIoerM
+https://www.youtube.com/watch?v=HCg3vJpfYeg&t=974s

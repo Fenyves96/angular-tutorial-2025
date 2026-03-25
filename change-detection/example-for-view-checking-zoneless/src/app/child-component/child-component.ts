@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component } from '@angular/core';
 
 @Component({
   selector: 'app-child-component',
   imports: [],
-  template:
-    '<p>Some child component with a function which returns with value: {{getRandomNumber()}}</p>',
+  template: '<p>simple child component</p>',
 })
-export class ChildComponent {
-  getRandomNumber() {
-    return Math.random();
+export class ChildComponent implements AfterViewChecked {
+  ngAfterViewChecked(): void {
+    console.log('app-child-component view checked');
   }
 }

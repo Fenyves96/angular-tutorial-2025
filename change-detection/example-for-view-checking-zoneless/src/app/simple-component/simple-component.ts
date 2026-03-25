@@ -1,5 +1,13 @@
-import { ChangeDetectorRef, Component, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ChangeDetectionStrategy,
+  AfterViewInit,
+  inject,
+  DestroyRef,
+} from '@angular/core';
 import { ChildComponent } from '../child-component/child-component';
+import { interval, map } from 'rxjs';
 
 @Component({
   selector: 'app-simple-component',
@@ -12,11 +20,23 @@ import { ChildComponent } from '../child-component/child-component';
     }
     <app-child-component />
   `,
-  styleUrl: './simple-component.scss'
+  styleUrl: './simple-component.scss',
 })
-export class SimpleComponent {
+export class SimpleComponent implements AfterViewInit {
   topicName = 'Decoded frontend';
   isVisible = true;
+  destroyRef = inject(DestroyRef);
+
+  ngAfterViewInit(): void {
+    const subscription = interval(1000)
+      .pipe(map((val) => val * 2))
+      .subscribe({
+        next: (val) => console.log(val),
+      });
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
+  }
 
   getInfo() {
     console.log('getInfo function has been called');

@@ -1,12 +1,12 @@
-import { AfterViewChecked, Component, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewChecked, Component } from '@angular/core';
 
 @Component({
   selector: 'app-child-component',
   imports: [],
-  template: '<p>Some child component with a console log function.</p>'
+  template: '<p>simple child component</p>',
 })
 export class ChildComponent implements AfterViewChecked {
   ngAfterViewChecked(): void {
-    console.log("child component's view checked");
+    console.log('app-child-component view checked');
   }
 }
