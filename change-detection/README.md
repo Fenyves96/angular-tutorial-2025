@@ -145,8 +145,8 @@ With Signals, Angular knows exactly what data changed and which components depen
 #TODO: signal solution
 
 sources:
-https://medium.com/@jaouadirabeb/from-zone-js-to-zoneless-the-evolution-of-angulars-change-detection-signals-and-observables-ded49b9e664a
-https://www.youtube.com/watch?v=hZOauXaO8Z8&t=11s
-https://www.youtube.com/watch?v=Ys7xdebd66Y&t=652s
-https://www.youtube.com/watch?v=WAu7omIoerM
-https://www.youtube.com/watch?v=HCg3vJpfYeg&t=974s
+- https://medium.com/@jaouadirabeb/from-zone-js-to-zoneless-the-evolution-of-angulars-change-detection-signals-and-observables-ded49b9e664a
+- https://www.youtube.com/watch?v=hZOauXaO8Z8&t=11s
+- https://www.youtube.com/watch?v=Ys7xdebd66Y&t=652s
+- https://www.youtube.com/watch?v=WAu7omIoerM
+- https://www.youtube.com/watch?v=HCg3vJpfYeg&t=974s
