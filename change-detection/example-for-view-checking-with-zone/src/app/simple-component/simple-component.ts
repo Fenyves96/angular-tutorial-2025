@@ -1,0 +1,31 @@
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChildComponent } from '../child-component/child-component';
+
+@Component({
+  selector: 'app-simple-component',
+  imports: [ChildComponent],
+  //All bindings interested in data changing
+  template: `
+    <h2>{{ topicName }}</h2>
+    @if (isVisible) {
+      <div>{{ getInfo() }}</div>
+    }
+    <app-child-component />
+  `,
+  styleUrl: './simple-component.scss',
+})
+export class SimpleComponent {
+  topicName = 'Decoded frontend';
+  isVisible = true;
+
+  getInfo() {
+    return 'random info';
+  }
+
+  constructor() {
+    setTimeout(() => {
+      this.topicName = 'new topic name after timeout';
+      console.log('Topic name changed to', this.topicName);
+    }, 3000);
+  }
+}
