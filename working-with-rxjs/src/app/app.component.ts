@@ -6,7 +6,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { interval, map } from 'rxjs';
+import { interval, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,19 @@ import { interval, map } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   clickCount = signal(0);
+  customInterval$ = new Observable((subscriber) => {
+    let timesExecuted = 0;
+    const interval = setInterval(() => {
+      if (timesExecuted > 3) {
+        clearInterval(interval);
+        subscriber.complete();
+        return;
+      }
+      console.log('emitting new value...');
+      subscriber.next({ message: 'new value' });
+      timesExecuted++;
+    }, 1000);
+  });
   private destoyRef = inject(DestroyRef);
 
   constructor() {
@@ -30,6 +43,10 @@ export class AppComponent implements OnInit {
         next: (val) => console.log(val),
         complete: () => {},
       });
+    this.customInterval$.subscribe({
+      next: (val) => console.log(val),
+      complete: () => console.log('completed'),
+    });
 
     this.destoyRef.onDestroy(() => {
       subscrition.unsubscribe();
